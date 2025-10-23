@@ -1,0 +1,139 @@
+/* ====== Soft + Clear UI (plain CSS) ====== */
+:root {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --text: #0b1220;
+  --muted: #6b7280;
+  --border: #e6e9ef;
+  --brand: #2563eb;
+  --brand-600: #1e4fd6;
+  --shadow: 0 6px 20px rgba(11, 18, 32, 0.06);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --space: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout */
+.container {
+  max-width: 760px;
+  margin: 56px auto;
+  padding: 0 16px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: calc(var(--space) + 2px);
+}
+
+/* Typography */
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+}
+.subtle {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Post block */
+.post {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fbfcfe;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* Button (soft, clear) */
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: #f7f9ff;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.08s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.06);
+}
+.btn:hover {
+  background: #eef4ff;
+  border-color: #d8e0f5;
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+.btn.primary {
+  background: #f1f6ff;
+  border-color: #d4def8;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* States (loading / error) */
+.state {
+  max-width: 760px;
+  margin: 56px auto;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--muted);
+}
+.state.error {
+  border-color: #f3d0d0;
+  color: #a83a3a;
+  background: #fff7f7;
+}
+
+/* Small screens */
+@media (max-width: 640px) {
+  .toolbar {
+    justify-content: stretch;
+  }
+  .btn {
+    flex: 1;
+  }
+}
