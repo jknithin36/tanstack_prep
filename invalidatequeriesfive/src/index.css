@@ -1,0 +1,304 @@
+/* ============== CSS Reset + Tokens ============== */
+:root {
+  --bg: 245 245 255;
+  --fg: 19 23 34;
+  --muted: 110 115 130;
+  --brand: 67 97 238; /* sapphire */
+  --brand-2: 161 132 255; /* lilac */
+  --ok: 16 185 129;
+  --danger: 239 68 68;
+  --ring: 99 102 241;
+
+  --radius: 16px;
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  --glass: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 9 11 18;
+    --fg: 232 235 243;
+    --muted: 150 155 170;
+    --glass: rgba(20, 24, 35, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.35),
+      0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: rgb(var(--fg));
+  background: radial-gradient(
+      1000px 600px at 10% -10%,
+      rgba(67, 97, 238, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 110% 10%,
+      rgba(161, 132, 255, 0.16),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgb(var(--bg)) 0%, rgb(var(--bg)) 100%);
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+/* ============== App Shell (targets your top-level <div>) ============== */
+body > div {
+  width: min(860px, 100%);
+  background: var(--glass);
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: calc(var(--radius) + 8px);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(20px, 3.5vw, 36px);
+  animation: cardIn 0.5s ease both;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ============== Heading ============== */
+h1 {
+  margin: 0 0 18px;
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--brand)) 0%,
+    rgb(var(--brand-2)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============== Form Bar ============== */
+form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  margin: 18px 0 24px;
+}
+
+label {
+  width: 100%;
+}
+
+input[type="text"],
+input[type="search"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  outline: none;
+  background: rgba(255, 255, 255, 0.8);
+  color: rgb(var(--fg));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease,
+    transform 0.06s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  input[type="text"],
+  input[type="search"],
+  input[type="password"] {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  }
+}
+
+input::placeholder {
+  color: rgb(var(--muted));
+  opacity: 0.9;
+}
+
+input:focus {
+  border-color: rgba(var(--ring), 0.55);
+  box-shadow: 0 0 0 4px rgba(var(--ring), 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.45) inset;
+}
+
+input:active {
+  transform: scale(0.997);
+}
+
+/* ============== Button ============== */
+button {
+  appearance: none;
+  border: 0;
+  padding: 12px 18px;
+  border-radius: calc(var(--radius) - 6px);
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--brand)) 0%,
+    rgba(var(--brand) / 0.92) 100%
+  );
+  color: white;
+  box-shadow: 0 6px 14px rgba(67, 97, 238, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.2s ease, filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(67, 97, 238, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+button:active {
+  transform: translateY(0);
+  filter: saturate(1.1);
+}
+
+button[disabled],
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+/* ============== List & Items ============== */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* inline style from JSX sets grid + gap; we enhance other parts here */
+}
+
+li {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--glass-border);
+  border-radius: calc(var(--radius) - 6px);
+  box-shadow: var(--shadow-lg);
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease;
+  animation: itemIn 0.35s ease both;
+}
+
+@keyframes itemIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  li {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+li:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+/* If your TodoItem renders buttons/icons inside <li>, this polishes them */
+li > *:is(button, a) {
+  margin-left: 8px;
+}
+
+li .danger,
+li [data-variant="danger"] {
+  background: linear-gradient(
+    180deg,
+    rgb(var(--danger)),
+    rgba(239, 68, 68, 0.92)
+  );
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.28);
+}
+
+li .ok,
+li [data-variant="ok"] {
+  background: linear-gradient(180deg, rgb(var(--ok)), rgba(16, 185, 129, 0.92));
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.28);
+}
+
+/* ============== Micro-interactions ============== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Focus ring for any actionable element */
+:focus-visible {
+  outline: 2px solid rgba(var(--ring), 0.6);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* ============== Subtle Scrollbar (Chrome/Edge) ============== */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(67, 97, 238, 0.7),
+    rgba(161, 132, 255, 0.7)
+  );
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============== Helper (optional) ============== */
+/* If your TodoItem sets a [data-done="true"] on <li>, this styles completed */
+li[data-done="true"] {
+  opacity: 0.75;
+  filter: saturate(0.8);
+  text-decoration-thickness: 0.1em;
+  text-decoration-color: rgba(var(--muted), 0.6);
+}
