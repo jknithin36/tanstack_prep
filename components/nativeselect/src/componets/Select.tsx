@@ -39,7 +39,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     },
     ref
   ) => {
-    const selectId = id || React.useId();
+    const generatedId = React.useId();
+    const selectId = id || generatedId;
     const describedById = React.useId();
     const hasHelper = Boolean(helperText);
     const hasError = Boolean(error);

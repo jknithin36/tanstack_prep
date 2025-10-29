@@ -160,3 +160,102 @@ const multiplyFour: MutliplyType = (a, b) => a * b;
 function sumNum(...args: number[]): number {
   return args.reduce((a, b) => a + b, 0);
 }
+
+type Value = string | number;
+
+let value: Value;
+value = "Hello";
+value = 23;
+// value = true;
+
+function typeNarrow(val: string | number) {
+  if (typeof val === "string") {
+    console.log(val);
+  } else {
+    console.log(val.toFixed(2));
+  }
+}
+
+typeNarrow("Nithin");
+
+typeNarrow(12.3344455);
+
+type OurUser = { name: string; email: string };
+type Admin = { name: string; email: string; accessedRoutes: string[] };
+
+function rolesAuth(Person: OurUser | Admin) {
+  if ("accessedRoutes" in Person) {
+    console.log(`hey Admin : ${Person.accessedRoutes}`);
+  } else {
+    console.log("hey user");
+  }
+}
+
+rolesAuth({
+  name: "Nithin",
+  email: "demo@gmail.com",
+  accessedRoutes: ["everything"],
+});
+
+interface Data {
+  readonly name: string;
+  age: number;
+  year?: number;
+}
+
+const personData: Data = {
+  name: "Nithin",
+  age: 23,
+  // year: 2002,
+};
+
+// personData.name = "Shiva";
+
+interface Person {
+  name: string;
+}
+
+interface Employee extends Person {
+  department: string;
+}
+
+const employeeData: Employee = {
+  name: "Shiva",
+  department: "Civil Engineering",
+};
+
+function identity<T>(value: T): T {
+  return value;
+}
+
+console.log(identity("Hello"));
+console.log(identity(5));
+// Auto detection
+
+console.log(identity<boolean>(true));
+console.log(identity<string>("Hello Nithin"));
+
+function getElement<T>(arr: T[]): T {
+  return arr[0];
+}
+
+console.log(getElement<string>(["hello", "Nithin"]));
+console.log(getElement<number>([1, 2, 3, 4]));
+
+function getObject<K, V>(key: K, value: V): [K, V] {
+  return [key, value];
+}
+
+console.log(getObject<string, number>("year", 2025));
+
+interface ApiResponse<T> {
+  status: number;
+  data: T;
+}
+
+const userResposne: ApiResponse<{ name: string }> = {
+  status: 200,
+  data: {
+    name: "Nithin",
+  },
+};
